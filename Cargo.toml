@@ -1,0 +1,19 @@
+# Cargo.toml
+[package]
+edition = "2021"
+name = "rust-bluepill"
+version = "0.9.0"
+
+[profile.release]
+opt-level = 'z' # Turn on maximum optimizations. We only have 64kB flash.
+lto = true      # Link-time-optimizations for further size reduction
+
+[dependencies]
+cortex-m = "0.7.6"      # ARM peripherals
+cortex-m-rt = "0.7.1"   # Start-up code
+panic-halt = "0.2.0"
+
+# Access to the stm32f103 HAL.
+[dependencies.stm32f1xx-hal]
+features = ["stm32f103", "rt", "medium"]    # Bluepill is a 64kB flash "medium density" device
+version = "0.9.0"
